@@ -19,7 +19,9 @@ abstract class PokemonDao {
     open suspend fun insertPokemonStuff(pokemons: List<PokemonAllStuffEntity>){
         pokemons.forEach {
             insertPokemon(it.pokemon)
+            deleteStat(it.stats)
             insertStat(it.stats)
+            deleteType(it.types)
             insertType(it.types)
         }
     }
@@ -30,8 +32,14 @@ abstract class PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertStat(pokemon: List<StatEntity>)
 
+    @Delete
+    abstract suspend fun deleteStat(pokemon: List<StatEntity>)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertType(pokemon: List<TypeEntity>)
+
+    @Delete
+    abstract suspend fun deleteType(pokemon: List<TypeEntity>)
 
     @Update
     abstract suspend fun updateFavoritePokemon(pokemon: PokemonEntity)
