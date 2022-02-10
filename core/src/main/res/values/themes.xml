@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.GottaCatchEmAll" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.GottaCatchEmAll" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -11,6 +11,34 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <item name="android:windowBackground">?attr/colorBackground</item>
+
         <!-- Customize your theme here. -->
+
+        <item name="colorRock">@color/rock</item>
+        <item name="colorGhost">@color/ghost</item>
+        <item name="colorSteel">@color/steel</item>
+        <item name="colorWater">@color/water</item>
+        <item name="colorGrass">@color/grass</item>
+        <item name="colorPhysic">@color/physic</item>
+        <item name="colorIce">@color/ice</item>
+        <item name="colorDark">@color/dark</item>
+        <item name="colorFairy">@color/fairy</item>
+        <item name="colorNormal">@color/normal</item>
+        <item name="colorFighting">@color/fighting</item>
+        <item name="colorFlying">@color/flying</item>
+        <item name="colorPoison">@color/poison</item>
+        <item name="colorGround">@color/ground</item>
+        <item name="colorBug">@color/bug</item>
+        <item name="colorFire">@color/fire</item>
+        <item name="colorElectric">@color/electric</item>
+        <item name="colorDragon">@color/dragon</item>
+
+        <item name="colorDarkGray">@color/dark_gray</item>
+        <item name="colorMediumGray">@color/medium_gray</item>
+        <item name="colorLightGray">@color/light_gray</item>
+        <item name="colorWhite">@color/white</item>
+        <item name="colorBackground">@color/background</item>
     </style>
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GottaCatchEmAllTheme">
+        <attr name="colorRock" format="color"/>
+        <attr name="colorGhost" format="color"/>
+        <attr name="colorSteel" format="color"/>
+        <attr name="colorWater" format="color"/>
+        <attr name="colorGrass" format="color"/>
+        <attr name="colorPhysic" format="color"/>
+        <attr name="colorIce" format="color"/>
+        <attr name="colorDark" format="color"/>
+        <attr name="colorFairy" format="color"/>
+        <attr name="colorNormal" format="color"/>
+        <attr name="colorFighting" format="color"/>
+        <attr name="colorFlying" format="color"/>
+        <attr name="colorPoison" format="color"/>
+        <attr name="colorGround" format="color"/>
+        <attr name="colorBug" format="color"/>
+        <attr name="colorFire" format="color"/>
+        <attr name="colorElectric" format="color"/>
+        <attr name="colorDragon" format="color"/>
+
+        <attr name="colorDarkGray" format="color"/>
+        <attr name="colorMediumGray" format="color"/>
+        <attr name="colorLightGray" format="color"/>
+        <attr name="colorWhite" format="color"/>
+        <attr name="colorBackground" format="color"/>
+    </declare-styleable>
+</resources>
