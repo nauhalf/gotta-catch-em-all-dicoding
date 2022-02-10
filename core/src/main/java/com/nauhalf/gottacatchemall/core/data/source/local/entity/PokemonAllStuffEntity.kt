@@ -5,7 +5,6 @@ import androidx.room.*
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "pokemon")
 data class PokemonAllStuffEntity(
     @Embedded
     val pokemon: PokemonEntity,

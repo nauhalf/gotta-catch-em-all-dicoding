@@ -1,7 +1,8 @@
-package com.nauhalf.gottacatchemall
+package com.nauhalf.gottacatchemall.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.nauhalf.gottacatchemall.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
