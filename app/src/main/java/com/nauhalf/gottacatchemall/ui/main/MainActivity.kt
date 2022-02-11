@@ -1,26 +1,17 @@
 package com.nauhalf.gottacatchemall.ui.main
 
 import android.os.Bundle
-import android.os.Parcelable
-import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
-import com.google.android.material.navigation.NavigationBarView
 import com.nauhalf.gottacatchemall.R
 import com.nauhalf.gottacatchemall.adapter.PokemonGridItemDecoration
 import com.nauhalf.gottacatchemall.adapter.PokemonListAdapter
 import com.nauhalf.gottacatchemall.core.base.BaseActivity
 import com.nauhalf.gottacatchemall.core.data.source.Resource
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
-import com.nauhalf.gottacatchemall.core.utils.FragmentPagerAdapter
 import com.nauhalf.gottacatchemall.databinding.ActivityMainBinding
-import com.nauhalf.gottacatchemall.ui.favorite.FavoriteFragment
-import com.nauhalf.gottacatchemall.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import java.util.ArrayList
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {

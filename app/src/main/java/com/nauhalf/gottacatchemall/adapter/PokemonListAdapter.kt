@@ -1,6 +1,5 @@
 package com.nauhalf.gottacatchemall.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.color.MaterialColors
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.utils.colorOfType
+import com.nauhalf.gottacatchemall.core.utils.extractPokemonName
 import com.nauhalf.gottacatchemall.databinding.ItemPokemonBinding
 
 
@@ -19,9 +19,9 @@ class PokemonListAdapter(diffUtil: DiffUtil.ItemCallback<Pokemon>) :
         RecyclerView.ViewHolder(binding.root) {
         fun binding(data: Pokemon) {
             binding.apply {
-                tvPokemonId.text = "#${data.id.toString().padStart(3, '0')}"
+                pokemonId = "#${data.id.toString().padStart(3, '0')}"
+                pokemonName = data.name.extractPokemonName()
                 val color = MaterialColors.getColor(root, data.types.colorOfType())
-                tvPokemonName.text = data.name.uppercase()
                 tvPokemonName.setBackgroundColor(color)
                 cardPokemon.strokeColor = color
                 Glide.with(root)

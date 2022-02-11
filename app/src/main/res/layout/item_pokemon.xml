@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="pokemonName"
+            type="String" />
+
+        <variable
+            name="pokemonId"
+            type="String" />
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,6 +34,7 @@
                 tools:textColor="?attr/colorGrass"
                 android:layout_marginTop="@dimen/tiny"
                 android:layout_marginEnd="@dimen/xsmall"
+                android:text="@{pokemonId}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="#001" />
@@ -45,6 +56,7 @@
                 tools:background="?attr/colorGrass"
                 android:paddingVertical="@dimen/tiny"
                 android:textColor="?attr/colorWhite"
+                android:text="@{pokemonName}"
                 android:textAlignment="center"
                 android:maxLines="1"
                 android:id="@+id/tv_pokemon_name"

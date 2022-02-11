@@ -30,3 +30,8 @@ fun List<Type>.colorOfType(): Int {
         else -> R.attr.colorDarkGray
     }
 }
+
+fun String.extractPokemonName(): String {
+    val words = this.split("-")
+    return words.joinToString("-"){ it.lowercase().replaceFirstChar { firstChar -> firstChar.uppercase() } }
+}

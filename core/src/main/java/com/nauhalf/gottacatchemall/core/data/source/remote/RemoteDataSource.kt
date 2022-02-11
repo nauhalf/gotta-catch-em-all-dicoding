@@ -19,7 +19,6 @@ class RemoteDataSource @Inject constructor(private val pokeApi: PokeApi) {
             try {
                 val response = pokeApi.getAllPokemon(limit, offset)
                 val dataArray = response.pokemons
-                Log.d("Pokemons Data Array", dataArray.toString())
                 val newArray = withContext(Dispatchers.IO) {
                     dataArray.map {
                         getDetailPokemon(it.getId())
