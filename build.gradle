@@ -30,7 +30,7 @@ buildscript {
 
     ext.hilt_version = '2.40'
 
-    ext.paging_version = '3.1.0'
+    ext.paging_version = '3.1.0-beta01'
     ext.lottie_version = '4.2.2'
     repositories {
         google()

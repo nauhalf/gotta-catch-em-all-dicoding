@@ -28,4 +28,8 @@ class DatabaseModule {
 
     @Provides
     fun provideMyPokemonDao(database: PokemonDatabase) = database.myPokemonDao()
+
+
+    @Provides
+    fun provideRemoteKeyDao(database: PokemonDatabase) = database.remoteKeyDao()
 }

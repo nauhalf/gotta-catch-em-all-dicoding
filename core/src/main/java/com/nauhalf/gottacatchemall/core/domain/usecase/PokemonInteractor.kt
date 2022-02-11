@@ -1,5 +1,6 @@
 package com.nauhalf.gottacatchemall.core.domain.usecase
 
+import androidx.paging.PagingData
 import com.nauhalf.gottacatchemall.core.data.source.Resource
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.StatEntity
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
@@ -18,5 +19,9 @@ class PokemonInteractor @Inject constructor(private val pokemonRepository: IPoke
 
     override fun setFavoritePokemon(pokemon: Pokemon, state: Boolean) {
         pokemonRepository.setFavoritePokemon(pokemon, state)
+    }
+
+    override fun getPagingPokemon(): Flow<PagingData<Pokemon>> {
+        return pokemonRepository.getPagingPokemon()
     }
 }

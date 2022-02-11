@@ -11,7 +11,6 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "pokemon")
 data class PokemonEntity(
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "_id")
     var id: Int,
 

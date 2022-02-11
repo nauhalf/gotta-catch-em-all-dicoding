@@ -1,5 +1,6 @@
 package com.nauhalf.gottacatchemall.core.data.source.local.room
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonAllStuffEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonEntity
@@ -12,6 +13,11 @@ abstract class PokemonDao {
     @Query("SELECT * FROM pokemon")
     abstract fun getAllPokemon(): Flow<List<PokemonAllStuffEntity>>
 
+    @Query("DELETE FROM pokemon")
+    abstract suspend fun clearPokemon()
+
+    @Query("SELECT * FROM pokemon ORDER BY _id ASC")
+    abstract fun getPagingPokemon(): PagingSource<Int, PokemonAllStuffEntity>
 
     @Query("SELECT * FROM pokemon")
     abstract fun getFavoritePokemon(): Flow<List<PokemonAllStuffEntity>>

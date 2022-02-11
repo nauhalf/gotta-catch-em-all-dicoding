@@ -1,6 +1,7 @@
 package com.nauhalf.gottacatchemall.core.data.source
 
 import android.util.Log
+import androidx.paging.*
 import com.nauhalf.gottacatchemall.core.data.source.local.LocalDataSource
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.StatEntity
 import com.nauhalf.gottacatchemall.core.data.source.remote.RemoteDataSource
@@ -10,6 +11,7 @@ import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.domain.repository.IPokemonRepository
 import com.nauhalf.gottacatchemall.core.utils.toPokemonAllStuffEntities
 import com.nauhalf.gottacatchemall.core.utils.toPokemonAllStuffEntity
+import com.nauhalf.gottacatchemall.core.utils.toPokemonDomain
 import com.nauhalf.gottacatchemall.core.utils.toPokemonDomains
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,5 +63,22 @@ class PokemonRepository @Inject constructor(
             )
         }
     }
+
+    override fun getPagingPokemon(): Flow<PagingData<Pokemon>> {
+        @OptIn(ExperimentalPagingApi::class)
+        return Pager(
+            config = PagingConfig(pageSize = POKEMON_STARTING_LIMIT, enablePlaceholders = false),
+            remoteMediator = PokemonRemoteMediator(
+                localDataSource.database,
+                remoteDataSource
+            ),
+            pagingSourceFactory = { localDataSource.getPagingPokemon() }
+        ).flow.map { pagingData ->
+            pagingData.map {
+                it.toPokemonDomain()
+            }
+        }
+    }
+
 
 }

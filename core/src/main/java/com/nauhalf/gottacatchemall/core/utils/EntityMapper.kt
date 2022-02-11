@@ -13,17 +13,22 @@ import com.nauhalf.gottacatchemall.core.domain.model.Type
 fun List<PokemonAllStuffEntity>.toPokemonDomains(): List<Pokemon>{
     return this.map {
         Log.v("toPokemonDomains", it.toString())
-        Pokemon(
-            id = it.pokemon.id,
-            name = it.pokemon.name,
-            height = it.pokemon.height,
-            weight = it.pokemon.weight,
-            stats = it.stats.toStatDomains(),
-            types = it.types.toTypeDomains(),
-            isFavorite = it.pokemon.isFavorite,
-            imageUrl = it.pokemon.imageUrl
-        )
+        it.toPokemonDomain()
     }
+}
+
+
+fun PokemonAllStuffEntity.toPokemonDomain(): Pokemon{
+    return Pokemon(
+            id = this.pokemon.id,
+            name = this.pokemon.name,
+            height = this.pokemon.height,
+            weight = this.pokemon.weight,
+            stats = this.stats.toStatDomains(),
+            types = this.types.toTypeDomains(),
+            isFavorite = this.pokemon.isFavorite,
+            imageUrl = this.pokemon.imageUrl
+        )
 }
 
 fun List<StatEntity>.toStatDomains(): List<Stat> {
