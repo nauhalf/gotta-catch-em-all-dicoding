@@ -7,13 +7,12 @@ import com.nauhalf.gottacatchemall.core.data.source.remote.response.PokemonRespo
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val pokeApi: PokeApi) {
-    suspend fun getAllPokemon(limit: Int = 50, offset: Int = 0): Flow<ApiResponse<List<PokemonResponse>>> = channelFlow {
+    suspend fun getAllPokemon(limit: Int = 151, offset: Int = 0): Flow<ApiResponse<List<PokemonResponse>>> = channelFlow {
         coroutineScope {
 
             try {
