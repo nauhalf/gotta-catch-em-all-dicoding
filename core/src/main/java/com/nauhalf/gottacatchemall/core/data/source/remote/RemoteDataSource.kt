@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val pokeApi: PokeApi) {
-    suspend fun getAllPokemon(limit: Int = 20, offset: Int = 0): Flow<ApiResponse<List<PokemonResponse>>> = channelFlow {
+    suspend fun getAllPokemon(limit: Int = 50, offset: Int = 0): Flow<ApiResponse<List<PokemonResponse>>> = channelFlow {
         coroutineScope {
 
             try {

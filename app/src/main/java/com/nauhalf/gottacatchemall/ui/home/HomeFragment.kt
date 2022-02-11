@@ -32,20 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun setUp() {
         binding.apply {
-            pokemonListAdapter = PokemonListAdapter(object : DiffUtil.ItemCallback<Pokemon>() {
-                override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-                    return oldItem == newItem
-                }
 
-                override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-                    return oldItem.id == newItem.id
-                }
-
-            })
-            rvHome.apply {
-                adapter = pokemonListAdapter
-                addItemDecoration(PokemonGridItemDecoration(resources.getDimensionPixelSize(R.dimen.xsmall), 3))
-            }
         }
     }
 
