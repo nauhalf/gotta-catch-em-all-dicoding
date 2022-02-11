@@ -20,7 +20,7 @@ class RemoteDataSource @Inject constructor(private val pokeApi: PokeApi) {
                 val dataArray = response.pokemons
                 val newArray = withContext(Dispatchers.IO) {
                     dataArray.map {
-                        getDetailPokemon(it.getId())
+                        getDetailPokemonAsync(it.getId())
                     }.awaitAll()
                 }
                 if (newArray.isNotEmpty()) {
@@ -35,7 +35,7 @@ class RemoteDataSource @Inject constructor(private val pokeApi: PokeApi) {
         }
     }
 
-    fun CoroutineScope.getDetailPokemon(id: Int): Deferred<PokemonResponse> =
+    private fun CoroutineScope.getDetailPokemonAsync(id: Int): Deferred<PokemonResponse> =
         async(Dispatchers.IO) {
             return@async pokeApi.getPokemon(id)
         }
