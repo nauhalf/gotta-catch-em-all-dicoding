@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class StatResponse(
-    @SerializedName("baseStat")
+    @SerializedName("base_stat")
     val baseStat: Int,
     @SerializedName("stat")
     val stat: Stat

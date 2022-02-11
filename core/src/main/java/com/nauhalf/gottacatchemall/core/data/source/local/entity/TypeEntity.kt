@@ -10,13 +10,8 @@ import javax.annotation.Nonnull
 
 
 @Parcelize
-@Entity(tableName = "type")
+@Entity(tableName = "type", primaryKeys = ["pokemonId", "slot", "type"])
 data class TypeEntity(
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
-    @ColumnInfo(name = "_id")
-    var id: Int = -1,
-
     @ColumnInfo(name = "pokemonId")
     @Nonnull
     var pokemonId: Int,

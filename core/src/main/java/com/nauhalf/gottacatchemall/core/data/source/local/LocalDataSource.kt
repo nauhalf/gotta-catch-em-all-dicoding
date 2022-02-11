@@ -10,6 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class LocalDataSource @Inject constructor(private val pokemonDao: PokemonDao) {
     fun getAllPokemon(): Flow<List<PokemonAllStuffEntity>> = pokemonDao.getAllPokemon()
+
     fun getFavoritePokemon(): Flow<List<PokemonAllStuffEntity>> = pokemonDao.getFavoritePokemon()
 
     suspend fun insertPokemon(pokemons: List<PokemonAllStuffEntity>) = pokemonDao.insertPokemonStuff(pokemons)

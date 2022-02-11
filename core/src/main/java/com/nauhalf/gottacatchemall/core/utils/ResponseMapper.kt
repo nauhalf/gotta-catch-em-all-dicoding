@@ -1,5 +1,6 @@
 package com.nauhalf.gottacatchemall.core.utils
 
+import android.util.Log
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonAllStuffEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.StatEntity

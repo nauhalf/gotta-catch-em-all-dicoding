@@ -9,19 +9,20 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class PokemonDao {
-    @Query("SELECT * FROM pokemon INNER JOIN stat ON pokemon._id = stat.pokemonId INNER JOIN type ON pokemon._id = type.pokemonId")
+    @Query("SELECT * FROM pokemon")
     abstract fun getAllPokemon(): Flow<List<PokemonAllStuffEntity>>
 
-    @Query("SELECT * FROM pokemon INNER JOIN stat ON pokemon._id = stat.pokemonId INNER JOIN type ON pokemon._id = type.pokemonId WHERE pokemon.isFavorite = 1")
+
+    @Query("SELECT * FROM pokemon")
     abstract fun getFavoritePokemon(): Flow<List<PokemonAllStuffEntity>>
 
     @Transaction
     open suspend fun insertPokemonStuff(pokemons: List<PokemonAllStuffEntity>){
         pokemons.forEach {
             insertPokemon(it.pokemon)
-            deleteStat(it.stats)
+            deleteStat(it.pokemon.id)
             insertStat(it.stats)
-            deleteType(it.types)
+            deleteType(it.pokemon.id)
             insertType(it.types)
         }
     }
@@ -32,14 +33,14 @@ abstract class PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertStat(pokemon: List<StatEntity>)
 
-    @Delete
-    abstract suspend fun deleteStat(pokemon: List<StatEntity>)
+    @Query("DELETE FROM stat WHERE pokemonId=:pokemonId")
+    abstract suspend fun deleteStat(pokemonId: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertType(pokemon: List<TypeEntity>)
 
-    @Delete
-    abstract suspend fun deleteType(pokemon: List<TypeEntity>)
+    @Query("DELETE FROM type WHERE pokemonId=:pokemonId")
+    abstract suspend fun deleteType(pokemonId: Int)
 
     @Update
     abstract suspend fun updateFavoritePokemon(pokemon: PokemonEntity)

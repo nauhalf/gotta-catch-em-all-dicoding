@@ -1,60 +1,66 @@
 package com.nauhalf.gottacatchemall.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DiffUtil
 import com.nauhalf.gottacatchemall.R
+import com.nauhalf.gottacatchemall.adapter.PokemonGridItemDecoration
+import com.nauhalf.gottacatchemall.adapter.PokemonListAdapter
+import com.nauhalf.gottacatchemall.core.base.BaseFragment
+import com.nauhalf.gottacatchemall.core.data.source.Resource
+import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
+import com.nauhalf.gottacatchemall.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+@AndroidEntryPoint
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val viewModel by viewModels<HomeViewModel>()
+    private lateinit var pokemonListAdapter: PokemonListAdapter
+    override fun baseOnCreateView() {
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUp()
+        observeLiveData()
+    }
+
+    private fun setUp() {
+        binding.apply {
+            pokemonListAdapter = PokemonListAdapter(object : DiffUtil.ItemCallback<Pokemon>() {
+                override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
+                    return oldItem == newItem
+                }
+
+                override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
+                    return oldItem.id == newItem.id
+                }
+
+            })
+            rvHome.apply {
+                adapter = pokemonListAdapter
+                addItemDecoration(PokemonGridItemDecoration(resources.getDimensionPixelSize(R.dimen.xsmall), 3))
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+    private fun observeLiveData() {
+        viewModel.pokemon.observe(viewLifecycleOwner){ pokemons ->
+            when(pokemons){
+                is Resource.Error -> {}
+                is Resource.Loading -> {
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                }
+                is Resource.Success -> {
+                    pokemonListAdapter.submitList(pokemons.data)
                 }
             }
+
+        }
     }
 }

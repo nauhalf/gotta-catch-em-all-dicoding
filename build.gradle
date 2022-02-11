@@ -29,6 +29,8 @@ buildscript {
     ext.fragment_ktx_version = "1.4.1"
 
     ext.hilt_version = '2.40'
+
+    ext.paging_version = '3.1.0'
     repositories {
         google()
         mavenCentral()

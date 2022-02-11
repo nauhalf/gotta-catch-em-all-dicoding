@@ -40,11 +40,11 @@
         <item name="colorLightGray">@color/light_gray</item>
         <item name="colorWhite">@color/white</item>
         <item name="colorBackground">@color/background</item>
+        <item name="android:textColor">?attr/colorDarkGray</item>
     </style>
 
-    <style name="Theme.GottaCatchEmAll.ActionBar.Transparent" parent="Theme.GottaCatchEmAll">
-        <item name="colorPrimary">@android:color/transparent</item>
-        <item name="elevation">0dp</item>
+    <style name="Theme.GottaCatchEmAll.BottomNavigation" parent="Theme.GottaCatchEmAll">
+        <item name="colorPrimary">?attr/colorDarkGray</item>
     </style>
 
     <style name="MyDenseOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">

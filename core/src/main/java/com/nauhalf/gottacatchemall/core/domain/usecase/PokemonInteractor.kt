@@ -1,6 +1,7 @@
 package com.nauhalf.gottacatchemall.core.domain.usecase
 
 import com.nauhalf.gottacatchemall.core.data.source.Resource
+import com.nauhalf.gottacatchemall.core.data.source.local.entity.StatEntity
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.domain.repository.IPokemonRepository
 import kotlinx.coroutines.flow.Flow

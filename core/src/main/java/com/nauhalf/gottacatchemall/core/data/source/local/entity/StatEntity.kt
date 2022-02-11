@@ -9,13 +9,8 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-@Entity(tableName = "stat")
+@Entity(tableName = "stat", primaryKeys = ["pokemonId", "stat", "baseStat"])
 data class StatEntity(
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
-    @ColumnInfo(name = "_id")
-    var id: Int = -1,
-
     @ColumnInfo(name = "pokemonId")
     @NonNull
     var pokemonId: Int,

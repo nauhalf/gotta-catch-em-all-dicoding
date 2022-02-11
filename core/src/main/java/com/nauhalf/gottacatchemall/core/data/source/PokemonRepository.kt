@@ -1,6 +1,8 @@
 package com.nauhalf.gottacatchemall.core.data.source
 
+import android.util.Log
 import com.nauhalf.gottacatchemall.core.data.source.local.LocalDataSource
+import com.nauhalf.gottacatchemall.core.data.source.local.entity.StatEntity
 import com.nauhalf.gottacatchemall.core.data.source.remote.RemoteDataSource
 import com.nauhalf.gottacatchemall.core.data.source.remote.network.ApiResponse
 import com.nauhalf.gottacatchemall.core.data.source.remote.response.PokemonResponse
@@ -25,11 +27,13 @@ class PokemonRepository @Inject constructor(
     override fun getAllPokemon(): Flow<Resource<List<Pokemon>>> =
         object : NetworkBoundResource<List<Pokemon>, List<PokemonResponse>>() {
             override fun loadFromDb(): Flow<List<Pokemon>> {
-                return localDataSource.getAllPokemon().map { it.toPokemonDomains() }
+                return localDataSource.getAllPokemon().map {
+                    it.toPokemonDomains()
+                }
             }
 
             override fun shouldFetch(data: List<Pokemon>?): Boolean {
-                return data == null || data.isEmpty()
+                return data.isNullOrEmpty()
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<PokemonResponse>>> {
@@ -50,8 +54,12 @@ class PokemonRepository @Inject constructor(
     }
 
     override fun setFavoritePokemon(pokemon: Pokemon, state: Boolean) {
-        CoroutineScope(Dispatchers.IO).launch{
-            localDataSource.setFavoritePokemon(pokemon = pokemon.toPokemonAllStuffEntity().pokemon, state)
+        CoroutineScope(Dispatchers.IO).launch {
+            localDataSource.setFavoritePokemon(
+                pokemon = pokemon.toPokemonAllStuffEntity().pokemon,
+                state
+            )
         }
     }
+
 }
