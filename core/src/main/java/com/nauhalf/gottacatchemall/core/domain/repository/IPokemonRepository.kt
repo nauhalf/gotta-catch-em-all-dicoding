@@ -10,4 +10,5 @@ interface IPokemonRepository {
     fun getAllPokemon(): Flow<Resource<List<Pokemon>>>
     fun getFavoritePokemon(): Flow<List<Pokemon>>
     fun setFavoritePokemon(pokemon: Pokemon, state: Boolean)
+    fun getPokemonSpecies(pokemon: Pokemon) : Flow<Resource<Pokemon>>
 }

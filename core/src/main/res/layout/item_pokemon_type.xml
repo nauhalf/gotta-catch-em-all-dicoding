@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="String" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_pokemon_type"
+        tools:cardBackgroundColor="?attr/colorGrass"
+        app:cardElevation="0dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/PoppinsBold10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/xsmall"
+            android:layout_marginVertical="2dp"
+            android:text="@{data}"
+            android:textColor="?attr/colorWhite"
+            tools:text="Grass" />
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

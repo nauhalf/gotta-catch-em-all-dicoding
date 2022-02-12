@@ -1,4 +1,4 @@
-package com.nauhalf.gottacatchemall.core.utils
+package com.nauhalf.gottacatchemall.core.ui
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

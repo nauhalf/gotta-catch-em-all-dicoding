@@ -1,15 +1,18 @@
 package com.nauhalf.gottacatchemall.core.data.source
 
+import android.net.Network
 import android.util.Log
 import com.nauhalf.gottacatchemall.core.data.source.local.LocalDataSource
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.StatEntity
 import com.nauhalf.gottacatchemall.core.data.source.remote.RemoteDataSource
 import com.nauhalf.gottacatchemall.core.data.source.remote.network.ApiResponse
 import com.nauhalf.gottacatchemall.core.data.source.remote.response.PokemonResponse
+import com.nauhalf.gottacatchemall.core.data.source.remote.response.PokemonSpeciesResponse
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.domain.repository.IPokemonRepository
 import com.nauhalf.gottacatchemall.core.utils.toPokemonAllStuffEntities
 import com.nauhalf.gottacatchemall.core.utils.toPokemonAllStuffEntity
+import com.nauhalf.gottacatchemall.core.utils.toPokemonDomain
 import com.nauhalf.gottacatchemall.core.utils.toPokemonDomains
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,5 +64,28 @@ class PokemonRepository @Inject constructor(
             )
         }
     }
+
+    override fun getPokemonSpecies(pokemon: Pokemon): Flow<Resource<Pokemon>> =
+        object : NetworkBoundResource<Pokemon, PokemonSpeciesResponse>() {
+            override fun loadFromDb(): Flow<Pokemon> {
+                return localDataSource.getPokemonById(pokemon.id).map { it.toPokemonDomain() }
+            }
+
+            override fun shouldFetch(data: Pokemon?): Boolean {
+                return data?.description == null
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<PokemonSpeciesResponse>> {
+                return remoteDataSource.getPokemonSpecies(pokemon.id)
+            }
+
+            override suspend fun saveCallResult(data: PokemonSpeciesResponse) {
+                val p = pokemon.toPokemonAllStuffEntity()
+                val description = data.flavorTextEntries.filter { it.language == "en" }.distinct()
+                    .take(3).joinToString(" ") { it.flavorText }.replace("[\\n\\t\\f]".toRegex(), " ")
+                localDataSource.updatePokemonRateDescription(p.pokemon, description, data.captureRate)
+            }
+
+        }.asFlow()
 
 }

@@ -12,6 +12,9 @@ abstract class PokemonDao {
     @Query("SELECT * FROM pokemon")
     abstract fun getAllPokemon(): Flow<List<PokemonAllStuffEntity>>
 
+    @Query("SELECT * FROM pokemon WHERE _id=:pokemonId")
+    abstract fun getPokemonById(pokemonId: Int): Flow<PokemonAllStuffEntity>
+
 
     @Query("SELECT * FROM pokemon")
     abstract fun getFavoritePokemon(): Flow<List<PokemonAllStuffEntity>>
@@ -43,5 +46,6 @@ abstract class PokemonDao {
     abstract suspend fun deleteType(pokemonId: Int)
 
     @Update
-    abstract suspend fun updateFavoritePokemon(pokemon: PokemonEntity)
+    abstract suspend fun updatePokemon(pokemon: PokemonEntity)
+
 }

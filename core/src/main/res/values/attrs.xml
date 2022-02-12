@@ -24,6 +24,7 @@
         <attr name="colorMediumGray" format="color"/>
         <attr name="colorLightGray" format="color"/>
         <attr name="colorWhite" format="color"/>
+        <attr name="colorWhiteAlpha10" format="color"/>
         <attr name="colorBackground" format="color"/>
     </declare-styleable>
 </resources>

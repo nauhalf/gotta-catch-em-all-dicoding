@@ -10,7 +10,9 @@ import com.nauhalf.gottacatchemall.adapter.PokemonListAdapter
 import com.nauhalf.gottacatchemall.core.base.BaseActivity
 import com.nauhalf.gottacatchemall.core.data.source.Resource
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
+import com.nauhalf.gottacatchemall.core.utils.startIntent
 import com.nauhalf.gottacatchemall.databinding.ActivityMainBinding
+import com.nauhalf.gottacatchemall.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setUp()
         observeLiveData()
     }
+
     private fun setUp() {
         pokemonListAdapter = PokemonListAdapter(object : DiffUtil.ItemCallback<Pokemon>() {
             override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
@@ -33,11 +36,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 return oldItem.id == newItem.id
             }
 
+        }, onItemSelected = { pokemon ->
+            startIntent(DetailActivity::class.java) {
+                it.putExtra(DetailActivity.EXTRA_DATA, pokemon)
+            }
+
         })
         binding.apply {
             rvPokemon.apply {
                 adapter = pokemonListAdapter
-                addItemDecoration(PokemonGridItemDecoration(resources.getDimensionPixelSize(R.dimen.xsmall), 3))
+                addItemDecoration(
+                    PokemonGridItemDecoration(
+                        resources.getDimensionPixelSize(R.dimen.xsmall),
+                        3
+                    )
+                )
             }
         }
     }
@@ -45,7 +58,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun observeLiveData() {
         viewModel.pokemon.observe(this) { pokemon ->
             if (pokemon != null) {
-                when(pokemon){
+                when (pokemon) {
                     is Resource.Error -> {
                         stopLoading()
                     }
@@ -61,13 +74,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
-    private fun stopLoading(){
+    private fun stopLoading() {
         binding.lottieLoading.progress = 0f
         binding.lottieLoading.pauseAnimation()
         binding.lottieLoading.visibility = View.GONE
     }
 
-    private fun startLoading(){
+    private fun startLoading() {
         binding.lottieLoading.playAnimation()
         binding.lottieLoading.visibility = View.VISIBLE
     }

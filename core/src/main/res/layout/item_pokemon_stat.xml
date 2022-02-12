@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="baseStatString"
+            type="String" />
+
+        <variable
+            name="baseStatNumber"
+            type="Integer" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_base_stat"
+            style="@style/PoppinsRegular12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{baseStatString}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="HP" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/xsmall"
+            android:max="255"
+            android:progress="@{baseStatNumber}"
+            tools:indicatorColor="?attr/colorGrass"
+            android:id="@+id/progress_stat"
+            app:layout_constraintBottom_toBottomOf="@id/tv_base_stat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_base_stat"
+            app:layout_constraintTop_toTopOf="@id/tv_base_stat"
+            app:trackCornerRadius="@dimen/tiny" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

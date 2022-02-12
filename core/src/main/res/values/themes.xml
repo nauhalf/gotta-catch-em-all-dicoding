@@ -39,6 +39,7 @@
         <item name="colorMediumGray">@color/medium_gray</item>
         <item name="colorLightGray">@color/light_gray</item>
         <item name="colorWhite">@color/white</item>
+        <item name="colorWhiteAlpha10">@color/whiteAlpha10</item>
         <item name="colorBackground">@color/background</item>
         <item name="android:textColor">?attr/colorDarkGray</item>
     </style>

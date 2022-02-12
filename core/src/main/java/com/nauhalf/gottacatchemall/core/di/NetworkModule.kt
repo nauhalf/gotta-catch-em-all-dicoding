@@ -1,6 +1,10 @@
 package com.nauhalf.gottacatchemall.core.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.nauhalf.gottacatchemall.core.data.source.remote.deserializer.FlavorTextEntryDeserializer
 import com.nauhalf.gottacatchemall.core.data.source.remote.network.PokeApi
+import com.nauhalf.gottacatchemall.core.data.source.remote.response.PokemonSpeciesResponse
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,10 +30,17 @@ class NetworkModule {
     }
 
     @Provides
+    fun provideGson(): Gson {
+        return GsonBuilder()
+            .registerTypeAdapter(PokemonSpeciesResponse.FlavorTextEntry::class.java, FlavorTextEntryDeserializer())
+            .create()
+    }
+
+    @Provides
     fun providePokeApi(): PokeApi {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://pokeapi.co/api/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(provideGson()))
             .client(provideOkHttpClient())
             .build()
         return retrofit.create(PokeApi::class.java)

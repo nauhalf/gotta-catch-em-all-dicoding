@@ -16,9 +16,10 @@ fun Pokemon.toPokemonAllStuffEntity(): PokemonAllStuffEntity {
             name = this.name,
             height = this.height,
             weight = this.weight,
+            description = this.description,
             isFavorite = this.isFavorite,
-            imageUrl = this.imageUrl
-
+            imageUrl = this.imageUrl,
+            captureRate = this.captureRate
         ),
         stats = this.stats.toStatEntities(this.id),
         types = this.types.toTypeEntities(this.id),

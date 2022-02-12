@@ -27,6 +27,12 @@ data class PokemonEntity(
     @NonNull
     val weight: Int,
 
+    @ColumnInfo(name = "captureRate")
+    var captureRate: Int?,
+
+    @ColumnInfo(name = "description")
+    var description: String?,
+
     @ColumnInfo(name = "isFavorite")
     @NonNull
     var isFavorite: Boolean = false,

@@ -9,6 +9,8 @@ data class Pokemon(
     val name: String,
     val height: Int,
     val weight: Int,
+    val description: String?,
+    val captureRate: Int?,
     val types: List<Type>,
     val stats: List<Stat>,
     val isFavorite: Boolean,

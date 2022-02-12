@@ -17,6 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/xsmall"
+        android:clickable="true"
+        android:focusable="true"
         app:cardElevation="0dp"
         android:id="@+id/card_pokemon"
         tools:strokeColor="?attr/colorGrass"

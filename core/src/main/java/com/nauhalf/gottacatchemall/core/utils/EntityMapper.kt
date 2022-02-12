@@ -1,8 +1,6 @@
 package com.nauhalf.gottacatchemall.core.utils
 
-import android.util.Log
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonAllStuffEntity
-import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.StatEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.TypeEntity
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
@@ -10,20 +8,25 @@ import com.nauhalf.gottacatchemall.core.domain.model.Stat
 import com.nauhalf.gottacatchemall.core.domain.model.Type
 
 
-fun List<PokemonAllStuffEntity>.toPokemonDomains(): List<Pokemon>{
+fun List<PokemonAllStuffEntity>.toPokemonDomains(): List<Pokemon> {
     return this.map {
-        Log.v("toPokemonDomains", it.toString())
-        Pokemon(
-            id = it.pokemon.id,
-            name = it.pokemon.name,
-            height = it.pokemon.height,
-            weight = it.pokemon.weight,
-            stats = it.stats.toStatDomains(),
-            types = it.types.toTypeDomains(),
-            isFavorite = it.pokemon.isFavorite,
-            imageUrl = it.pokemon.imageUrl
-        )
+        it.toPokemonDomain()
     }
+}
+
+fun PokemonAllStuffEntity.toPokemonDomain(): Pokemon {
+    return Pokemon(
+        id = this.pokemon.id,
+        name = this.pokemon.name,
+        height = this.pokemon.height,
+        weight = this.pokemon.weight,
+        description = this.pokemon.description,
+        captureRate = this.pokemon.captureRate,
+        stats = this.stats.toStatDomains(),
+        types = this.types.toTypeDomains(),
+        isFavorite = this.pokemon.isFavorite,
+        imageUrl = this.pokemon.imageUrl
+    )
 }
 
 fun List<StatEntity>.toStatDomains(): List<Stat> {
