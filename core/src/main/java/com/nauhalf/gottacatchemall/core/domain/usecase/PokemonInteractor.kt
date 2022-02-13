@@ -16,8 +16,8 @@ class PokemonInteractor @Inject constructor(private val pokemonRepository: IPoke
         return pokemonRepository.getFavoritePokemon()
     }
 
-    override fun setFavoritePokemon(pokemon: Pokemon, state: Boolean) {
-        pokemonRepository.setFavoritePokemon(pokemon, state)
+    override fun setFavoritePokemon(pokemon: Pokemon, state: Boolean): Flow<Boolean> {
+        return pokemonRepository.setFavoritePokemon(pokemon, state)
     }
 
     override fun getPokemonSpecies(pokemon: Pokemon): Flow<Resource<Pokemon>> {

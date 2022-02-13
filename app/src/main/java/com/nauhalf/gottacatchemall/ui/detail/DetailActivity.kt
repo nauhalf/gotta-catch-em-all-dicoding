@@ -1,10 +1,14 @@
 package com.nauhalf.gottacatchemall.ui.detail
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.color.MaterialColors
 import com.nauhalf.gottacatchemall.R
 import com.nauhalf.gottacatchemall.core.adapter.PokemonStatAdapter
@@ -19,6 +23,8 @@ import com.nauhalf.gottacatchemall.core.utils.showToast
 import com.nauhalf.gottacatchemall.core.utils.toRealSizePokemon
 import com.nauhalf.gottacatchemall.databinding.ActivityDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_detail) {
@@ -43,16 +49,35 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
 
     private fun setUp(pokemonData: Pokemon) {
         val color = pokemonData.types.colorOfFirstType()
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         statTitleAdapter = PokemonStatTitleAdapter(color)
         statAdapter = PokemonStatAdapter(color)
         typeAdapter = PokemonTypeAdapter()
         binding.apply {
             rvStatTitle.adapter = statTitleAdapter
             rvStat.adapter = statAdapter
-            rvPokemonType.addItemDecoration(PokemonTypeItemDecoration(resources.getDimensionPixelSize(R.dimen.medium)))
+            rvPokemonType.addItemDecoration(
+                PokemonTypeItemDecoration(
+                    resources.getDimensionPixelSize(
+                        R.dimen.medium
+                    )
+                )
+            )
             rvPokemonType.adapter = typeAdapter
 
-            ivBack.setOnClickListener { finish() }
+            ivFavorite.setOnClickListener {
+                lifecycleScope.launch {
+                    viewModel.setFavorite().collect {
+                        if (it) {
+                            showToast("Thanks for giving them affection")
+                        }
+                    }
+                }
+            }
         }
 
         if (viewModel.pokemon.value == null) {
@@ -75,6 +100,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
                     val colorType = MaterialColors.getColor(root, pokemon.types.colorOfFirstType())
 
                     root.setBackgroundColor(colorType)
+                    collapsing.contentScrim = ColorDrawable(colorType)
                     tvAbout.setTextColor(colorType)
                     tvBaseStats.setTextColor(colorType)
                     tvDescription.text = pokemon.description ?: "No Description"

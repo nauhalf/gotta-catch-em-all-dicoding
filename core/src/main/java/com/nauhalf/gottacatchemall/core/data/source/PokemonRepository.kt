@@ -16,7 +16,10 @@ import com.nauhalf.gottacatchemall.core.utils.toPokemonDomain
 import com.nauhalf.gottacatchemall.core.utils.toPokemonDomains
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -56,13 +59,15 @@ class PokemonRepository @Inject constructor(
         }
     }
 
-    override fun setFavoritePokemon(pokemon: Pokemon, state: Boolean) {
-        CoroutineScope(Dispatchers.IO).launch {
+    override fun setFavoritePokemon(pokemon: Pokemon, state: Boolean): Flow<Boolean> = flow {
+        val result = CoroutineScope(Dispatchers.IO).async {
             localDataSource.setFavoritePokemon(
                 pokemon = pokemon.toPokemonAllStuffEntity().pokemon,
                 state
             )
-        }
+
+        }.await()
+        emitAll(result.map { it.isFavorite })
     }
 
     override fun getPokemonSpecies(pokemon: Pokemon): Flow<Resource<Pokemon>> =
@@ -82,8 +87,13 @@ class PokemonRepository @Inject constructor(
             override suspend fun saveCallResult(data: PokemonSpeciesResponse) {
                 val p = pokemon.toPokemonAllStuffEntity()
                 val description = data.flavorTextEntries.filter { it.language == "en" }.distinct()
-                    .take(3).joinToString(" ") { it.flavorText }.replace("[\\n\\t\\f]".toRegex(), " ")
-                localDataSource.updatePokemonRateDescription(p.pokemon, description, data.captureRate)
+                    .take(3).joinToString(" ") { it.flavorText }
+                    .replace("[\\n\\t\\f]".toRegex(), " ")
+                localDataSource.updatePokemonRateDescription(
+                    p.pokemon,
+                    description,
+                    data.captureRate
+                )
             }
 
         }.asFlow()
