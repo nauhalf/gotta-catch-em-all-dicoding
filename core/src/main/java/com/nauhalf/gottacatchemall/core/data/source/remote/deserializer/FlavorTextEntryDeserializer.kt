@@ -14,11 +14,11 @@ class FlavorTextEntryDeserializer : JsonDeserializer<PokemonSpeciesResponse.Flav
         context: JsonDeserializationContext?
     ): PokemonSpeciesResponse.FlavorTextEntry {
 
-        if(json?.isJsonObject == true){
+        if (json?.isJsonObject == true) {
             val language = json.asJsonObject.get("language")
-            if(language != null && language.isJsonObject){
+            if (language != null && language.isJsonObject) {
                 val name = language.asJsonObject.get("name")
-                if(name != null){
+                if (name != null) {
                     json.asJsonObject.add("language_name", name.asJsonPrimitive)
                 }
             }

@@ -11,7 +11,7 @@ data class MyPokemonWithAllStuffEntity(
     val myPokemon: MyPokemonEntity,
 
     @Relation(
-        entity= PokemonEntity::class,
+        entity = PokemonEntity::class,
         parentColumn = "pokemonId",
         entityColumn = "_id"
     )

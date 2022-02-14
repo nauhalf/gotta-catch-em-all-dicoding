@@ -15,12 +15,13 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context): PokemonDatabase = Room.databaseBuilder(
-        context.applicationContext,
-        PokemonDatabase::class.java,
-        "Pokemon.db"
-    ).fallbackToDestructiveMigration()
-        .build()
+    fun provideDatabase(@ApplicationContext context: Context): PokemonDatabase =
+        Room.databaseBuilder(
+            context.applicationContext,
+            PokemonDatabase::class.java,
+            "Pokemon.db"
+        ).fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     fun providePokemonDao(database: PokemonDatabase) = database.pokemonDao()

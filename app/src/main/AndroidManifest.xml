@@ -14,9 +14,10 @@
         android:theme="@style/Theme.GottaCatchEmAll">
         <activity
             android:name=".ui.detail.DetailActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

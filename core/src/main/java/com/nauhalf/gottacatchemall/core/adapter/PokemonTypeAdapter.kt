@@ -44,7 +44,12 @@ class PokemonTypeAdapter :
         fun bind(item: Type) {
             binding.apply {
                 data = item.type.lowercase().replaceFirstChar { it.uppercase() }
-                cardPokemonType.setCardBackgroundColor(MaterialColors.getColor(this.root, item.colorOfType()))
+                cardPokemonType.setCardBackgroundColor(
+                    MaterialColors.getColor(
+                        this.root,
+                        item.colorOfType()
+                    )
+                )
                 executePendingBindings()
             }
         }

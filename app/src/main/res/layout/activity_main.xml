@@ -11,8 +11,8 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
+            app:elevation="0dp"
             android:layout_height="wrap_content"
-            app:liftOnScroll="true"
             android:background="?attr/colorBackground">
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -49,54 +49,25 @@
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_pokemon"
+            <androidx.viewpager2.widget.ViewPager2
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                android:padding="@dimen/medium"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="3"
-                tools:listitem="@layout/item_pokemon" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/view_pager"/>
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/lottie_loading"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_rawRes="@raw/pokeball"
-                app:lottie_loop="true"/>
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:id="@+id/navigation"
+                app:menu="@menu/navigation"/>
 
-            <!--        <com.google.android.material.textfield.TextInputLayout-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            app:layout_constraintTop_toTopOf="parent"-->
-            <!--            style="@style/MyDenseOutlined"-->
-            <!--            app:placeholderText="Cari Pokemon"-->
-            <!--            app:boxBackgroundMode="none"-->
-            <!--            app:hintEnabled="false"-->
-            <!--            app:boxBackgroundColor="@color/white"-->
-            <!--            android:background="@drawable/bg_search"-->
-            <!--            android:layout_height="wrap_content">-->
-            <!--            <com.google.android.material.textfield.TextInputEditText-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:textAppearance="@style/PoppinsRegular14"-->
-            <!--                android:drawablePadding="@dimen/xsmall"-->
-            <!--                android:background="@null"-->
-            <!--                android:drawableStart="@drawable/ic_search_medium_gray"-->
-            <!--                android:layout_height="wrap_content"/>-->
-
-            <!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,6 +1,9 @@
 package com.nauhalf.gottacatchemall.ui.detail
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.nauhalf.gottacatchemall.core.data.source.Resource
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.domain.usecase.PokemonUseCase

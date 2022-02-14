@@ -20,5 +20,5 @@ data class PokemonSpeciesResponse(
 
         @SerializedName("language_name")
         val language: String
-    ): Parcelable
+    ) : Parcelable
 }

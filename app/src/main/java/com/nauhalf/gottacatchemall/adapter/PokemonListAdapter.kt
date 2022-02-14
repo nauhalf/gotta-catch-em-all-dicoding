@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.color.MaterialColors
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.utils.colorOfFirstType
-import com.nauhalf.gottacatchemall.core.utils.extractPokemonName
 import com.nauhalf.gottacatchemall.databinding.ItemPokemonBinding
 
 

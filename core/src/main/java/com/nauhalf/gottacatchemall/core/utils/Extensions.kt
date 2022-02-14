@@ -3,11 +3,18 @@ package com.nauhalf.gottacatchemall.core.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.Toast
 import com.nauhalf.gottacatchemall.core.R
 import com.nauhalf.gottacatchemall.core.domain.model.Type
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-fun String.idFromUrl(): Int{
+fun String.idFromUrl(): Int {
     return this.substringAfter("pokemon").replace("/", "").toInt()
 }
 
@@ -16,7 +23,7 @@ fun List<Type>.colorOfFirstType(): Int {
 }
 
 fun Type?.colorOfType(): Int {
-    return when(this?.type){
+    return when (this?.type) {
         "normal" -> R.attr.colorNormal
         "fighting" -> R.attr.colorFighting
         "flying" -> R.attr.colorFlying
@@ -39,8 +46,8 @@ fun Type?.colorOfType(): Int {
     }
 }
 
-fun String.mapStat(): String{
-    return when(this){
+fun String.mapStat(): String {
+    return when (this) {
         "attack" -> "ATK"
         "defense" -> "DEF"
         "hp" -> "HP"
@@ -53,21 +60,51 @@ fun String.mapStat(): String{
 
 fun String.extractPokemonName(): String {
     val words = this.split("-")
-    return words.joinToString("-"){ it.lowercase().replaceFirstChar { firstChar -> firstChar.uppercase() } }
+    return words.joinToString("-") {
+        it.lowercase().replaceFirstChar { firstChar -> firstChar.uppercase() }
+    }
 }
 
-fun Context.showToast(message: String?, duration: Int=Toast.LENGTH_SHORT) {
+fun Context.showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
     message?.let {
         Toast.makeText(this, it, duration).show()
     }
 }
 
-fun Int.toRealSizePokemon() : Double {
-    return this.toDouble()/10
+fun Int.toRealSizePokemon(): Double {
+    return this.toDouble() / 10
 }
 
-fun Context.startIntent(clazz: Class<*>, extras: (Intent) -> Unit){
-    val intent= Intent(this, clazz)
+fun Context.startIntent(clazz: Class<*>, extras: (Intent) -> Unit) {
+    val intent = Intent(this, clazz)
     extras.invoke(intent)
     startActivity(intent)
+}
+
+fun <T> debounce(
+    waitMs: Long = 300L,
+    scope: CoroutineScope,
+    destinationFunction: (T) -> Unit
+): (T) -> Unit {
+    var debounceJob: Job? = null
+    return {
+        debounceJob?.cancel()
+        debounceJob = scope.launch {
+            delay(waitMs)
+            destinationFunction.invoke(it)
+        }
+    }
+}
+
+fun EditText.onTextChanged(listener: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+
+        override fun afterTextChanged(s: Editable?) {
+            listener(s.toString())
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    })
 }

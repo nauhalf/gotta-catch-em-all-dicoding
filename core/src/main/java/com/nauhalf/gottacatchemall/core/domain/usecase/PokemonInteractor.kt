@@ -7,7 +7,8 @@ import com.nauhalf.gottacatchemall.core.domain.repository.IPokemonRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PokemonInteractor @Inject constructor(private val pokemonRepository: IPokemonRepository): PokemonUseCase{
+class PokemonInteractor @Inject constructor(private val pokemonRepository: IPokemonRepository) :
+    PokemonUseCase {
     override fun getAllPokemon(): Flow<Resource<List<Pokemon>>> {
         return pokemonRepository.getAllPokemon()
     }

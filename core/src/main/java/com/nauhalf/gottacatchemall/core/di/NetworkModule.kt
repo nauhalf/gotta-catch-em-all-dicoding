@@ -32,7 +32,10 @@ class NetworkModule {
     @Provides
     fun provideGson(): Gson {
         return GsonBuilder()
-            .registerTypeAdapter(PokemonSpeciesResponse.FlavorTextEntry::class.java, FlavorTextEntryDeserializer())
+            .registerTypeAdapter(
+                PokemonSpeciesResponse.FlavorTextEntry::class.java,
+                FlavorTextEntryDeserializer()
+            )
             .create()
     }
 

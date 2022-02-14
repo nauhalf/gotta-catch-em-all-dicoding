@@ -14,7 +14,7 @@ class PokemonTypeItemDecoration(private val marginSize: Int) : RecyclerView.Item
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         val position = parent.getChildLayoutPosition(view)
-        if(position > 0){
+        if (position > 0) {
             outRect.left = marginSize
         } else {
             outRect.left = 0

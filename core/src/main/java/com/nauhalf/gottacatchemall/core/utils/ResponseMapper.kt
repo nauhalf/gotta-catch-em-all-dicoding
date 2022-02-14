@@ -19,7 +19,8 @@ fun List<PokemonResponse>.toPokemonAllStuffEntities(): List<PokemonAllStuffEntit
                 height = it.height,
                 weight = it.weight,
                 isFavorite = false,
-                imageUrl = it.sprites?.other?.officialArtwork?.frontDefault ?: it.sprites?.other?.dreamWorld?.frontDefault,
+                imageUrl = it.sprites?.other?.officialArtwork?.frontDefault
+                    ?: it.sprites?.other?.dreamWorld?.frontDefault,
                 description = null,
                 captureRate = null
             ),

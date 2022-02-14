@@ -1,87 +1,41 @@
 package com.nauhalf.gottacatchemall.ui.main
 
 import android.os.Bundle
-import android.view.View
-import androidx.activity.viewModels
-import androidx.recyclerview.widget.DiffUtil
+import android.view.MenuItem
 import com.nauhalf.gottacatchemall.R
-import com.nauhalf.gottacatchemall.adapter.PokemonGridItemDecoration
-import com.nauhalf.gottacatchemall.adapter.PokemonListAdapter
 import com.nauhalf.gottacatchemall.core.base.BaseActivity
-import com.nauhalf.gottacatchemall.core.data.source.Resource
-import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
-import com.nauhalf.gottacatchemall.core.utils.startIntent
+import com.nauhalf.gottacatchemall.core.ui.FragmentPagerAdapter
 import com.nauhalf.gottacatchemall.databinding.ActivityMainBinding
-import com.nauhalf.gottacatchemall.ui.detail.DetailActivity
+import com.nauhalf.gottacatchemall.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private val viewModel by viewModels<MainViewModel>()
-    private lateinit var pokemonListAdapter: PokemonListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUp()
-        observeLiveData()
     }
 
     private fun setUp() {
-        pokemonListAdapter = PokemonListAdapter(object : DiffUtil.ItemCallback<Pokemon>() {
-            override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-                return oldItem == newItem
-            }
-
-            override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-        }, onItemSelected = { pokemon ->
-            startIntent(DetailActivity::class.java) {
-                it.putExtra(DetailActivity.EXTRA_DATA, pokemon)
-            }
-
-        })
-        binding.apply {
-            rvPokemon.apply {
-                adapter = pokemonListAdapter
-                addItemDecoration(
-                    PokemonGridItemDecoration(
-                        resources.getDimensionPixelSize(R.dimen.xsmall),
-                        3
-                    )
-                )
-            }
-        }
-    }
-
-    private fun observeLiveData() {
-        viewModel.pokemon.observe(this) { pokemon ->
-            if (pokemon != null) {
-                when (pokemon) {
-                    is Resource.Error -> {
-                        stopLoading()
-                    }
-                    is Resource.Loading -> {
-                        startLoading()
-                    }
-                    is Resource.Success -> {
-                        stopLoading()
-                        pokemonListAdapter.submitList(pokemon.data)
-                    }
+        val pager = FragmentPagerAdapter(
+            listOf(HomeFragment(), HomeFragment()),
+            supportFragmentManager,
+            lifecycle
+        )
+        binding.viewPager.adapter = pager
+        binding.viewPager.isUserInputEnabled = false
+        binding.navigation.setOnItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    binding.viewPager.currentItem = 0
+                }
+                R.id.navigation_favorite -> {
+                    binding.viewPager.currentItem = 1
                 }
             }
+            true
         }
     }
 
-    private fun stopLoading() {
-        binding.lottieLoading.progress = 0f
-        binding.lottieLoading.pauseAnimation()
-        binding.lottieLoading.visibility = View.GONE
-    }
-
-    private fun startLoading() {
-        binding.lottieLoading.playAnimation()
-        binding.lottieLoading.visibility = View.VISIBLE
-    }
 }

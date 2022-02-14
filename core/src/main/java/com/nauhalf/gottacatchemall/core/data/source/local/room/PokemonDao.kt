@@ -20,7 +20,7 @@ abstract class PokemonDao {
     abstract fun getFavoritePokemon(): Flow<List<PokemonAllStuffEntity>>
 
     @Transaction
-    open suspend fun insertPokemonStuff(pokemons: List<PokemonAllStuffEntity>){
+    open suspend fun insertPokemonStuff(pokemons: List<PokemonAllStuffEntity>) {
         pokemons.forEach {
             insertPokemon(it.pokemon)
             deleteStat(it.pokemon.id)

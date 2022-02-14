@@ -37,6 +37,6 @@ data class PokemonEntity(
     @NonNull
     var isFavorite: Boolean = false,
 
-    @ColumnInfo(name= "imageUrl")
+    @ColumnInfo(name = "imageUrl")
     var imageUrl: String? = null
 ) : Parcelable

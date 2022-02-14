@@ -3,12 +3,10 @@ package com.nauhalf.gottacatchemall.ui.detail
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.color.MaterialColors
 import com.nauhalf.gottacatchemall.R
 import com.nauhalf.gottacatchemall.core.adapter.PokemonStatAdapter
