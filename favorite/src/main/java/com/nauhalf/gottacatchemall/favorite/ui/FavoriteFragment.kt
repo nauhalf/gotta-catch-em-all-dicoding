@@ -1,12 +1,10 @@
-package com.nauhalf.gottacatchemall.ui.home
+package com.nauhalf.gottacatchemall.favorite.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
-import com.nauhalf.gottacatchemall.R
 import com.nauhalf.gottacatchemall.adapter.PokemonGridItemDecoration
 import com.nauhalf.gottacatchemall.adapter.PokemonListAdapter
 import com.nauhalf.gottacatchemall.core.base.BaseFragment
@@ -15,15 +13,40 @@ import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.utils.debounce
 import com.nauhalf.gottacatchemall.core.utils.onTextChanged
 import com.nauhalf.gottacatchemall.core.utils.startIntent
-import com.nauhalf.gottacatchemall.databinding.FragmentHomeBinding
+import com.nauhalf.gottacatchemall.di.FavoriteModuleDependencies
+import com.nauhalf.gottacatchemall.favorite.DaggerFavoriteComponent
+import com.nauhalf.gottacatchemall.favorite.R
+import com.nauhalf.gottacatchemall.favorite.databinding.FragmentFavoriteBinding
+import com.nauhalf.gottacatchemall.favorite.factory.ViewModelFactory
 import com.nauhalf.gottacatchemall.ui.detail.DetailActivity
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
+import javax.inject.Inject
 
-@AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite) {
 
-    private val viewModel by viewModels<HomeViewModel>()
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val viewModel by viewModels<FavoriteViewModel> {
+        factory
+    }
+
     private lateinit var pokemonListAdapter: PokemonListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        DaggerFavoriteComponent
+            .builder()
+            .context(requireContext())
+            .appDependencies(
+                EntryPointAccessors.fromApplication(
+                    requireActivity().applicationContext,
+                    FavoriteModuleDependencies::class.java
+                )
+            )
+            .build()
+            .inject(this)
+    }
 
     override fun baseOnCreateView() {
         binding.vm = viewModel
@@ -33,6 +56,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         setUp()
         observeLiveData()
+    }
+
+    private fun observeLiveData() {
+        viewModel.pokemons.observe(viewLifecycleOwner) {
+            viewModel.onSearchChanged(viewModel.keyword.value)
+        }
+
+        viewModel.filteredPokemon.observe(viewLifecycleOwner) { pokemons ->
+            pokemonListAdapter.submitList(pokemons)
+        }
     }
 
     private fun setUp() {
@@ -56,7 +89,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 adapter = pokemonListAdapter
                 addItemDecoration(
                     PokemonGridItemDecoration(
-                        resources.getDimensionPixelSize(R.dimen.xsmall),
+                        resources.getDimensionPixelSize(com.nauhalf.gottacatchemall.R.dimen.xsmall),
                         3
                     )
                 )
@@ -71,41 +104,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    private fun observeLiveData() {
-        viewModel.pokemon.observe(viewLifecycleOwner) { pokemon ->
-            if (pokemon != null) {
-                when (pokemon) {
-                    is Resource.Error -> {
-                        stopLoading()
-                    }
-                    is Resource.Loading -> {
-                        startLoading()
-                    }
-                    is Resource.Success -> {
-                        viewModel.tempPokemon = pokemon.data ?: listOf()
-                        viewModel.onSearchChanged(viewModel.keyword.value)
-                        stopLoading()
-                    }
-                }
-            }
-        }
-
-        viewModel.filteredPokemon.observe(viewLifecycleOwner) { pokemons ->
-            pokemonListAdapter.submitList(pokemons)
-        }
-    }
-
-
-    private fun stopLoading() {
-        binding.lottieLoading.progress = 0f
-        binding.lottieLoading.pauseAnimation()
-        binding.lottieLoading.isVisible = false
-        binding.clResult.isVisible = true
-    }
-
-    private fun startLoading() {
-        binding.clResult.isVisible = false
-        binding.lottieLoading.playAnimation()
-        binding.lottieLoading.isVisible = true
-    }
 }

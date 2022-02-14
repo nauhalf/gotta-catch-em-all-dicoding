@@ -1,9 +1,7 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.dynamic-feature'
     id 'kotlin-android'
-    id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
 }
 
 apply from: '../shared_dependencies.gradle'
@@ -11,7 +9,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.nauhalf.catchemallpokemon"
+        applicationId "com.nauhalf.gottacatchemall.favorite"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -26,20 +24,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
     buildFeatures {
-        dataBinding = true
+        dataBinding true
     }
-    dynamicFeatures = [':favorite']
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(":app")
     implementation project(":core")
 }

@@ -2,6 +2,7 @@ package com.nauhalf.gottacatchemall.ui.main
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import com.nauhalf.gottacatchemall.R
 import com.nauhalf.gottacatchemall.core.base.BaseActivity
 import com.nauhalf.gottacatchemall.core.ui.FragmentPagerAdapter
@@ -19,7 +20,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun setUp() {
         val pager = FragmentPagerAdapter(
-            listOf(HomeFragment(), HomeFragment()),
+            listOf(HomeFragment(),
+                Class.forName("com.nauhalf.gottacatchemall.favorite.ui.FavoriteFragment")
+                    .newInstance() as Fragment
+            ),
             supportFragmentManager,
             lifecycle
         )

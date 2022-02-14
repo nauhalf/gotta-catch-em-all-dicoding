@@ -70,7 +70,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
             ivFavorite.setOnClickListener {
                 lifecycleScope.launch {
                     viewModel.setFavorite().collect {
-                        if (it) {
+                        viewModel.setPokemon(it)
+                        if (it.isFavorite) {
                             showToast("Thanks for giving them affection")
                         }
                     }

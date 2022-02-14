@@ -1,10 +1,12 @@
 package com.nauhalf.gottacatchemall.core.data.source.local
 
+import android.util.Log
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonAllStuffEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.room.PokemonDao
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,11 +23,20 @@ class LocalDataSource @Inject constructor(private val pokemonDao: PokemonDao) {
     suspend fun insertPokemon(pokemons: List<PokemonAllStuffEntity>) =
         pokemonDao.insertPokemonStuff(pokemons)
 
-    suspend fun setFavoritePokemon(pokemon: PokemonEntity, newState: Boolean): Flow<PokemonEntity> =
+    suspend fun setFavoritePokemon(
+        pokemon: PokemonEntity,
+        newState: Boolean
+    ): Flow<PokemonAllStuffEntity> =
         flow {
             pokemon.isFavorite = newState
             pokemonDao.updatePokemon(pokemon)
-            emit(pokemon)
+
+            val newPokemon = getPokemonById(pokemon.id).first()
+            println("Get Pokemon from db: $newPokemon")
+
+            emit(
+                newPokemon
+            )
         }
 
     suspend fun updatePokemonRateDescription(

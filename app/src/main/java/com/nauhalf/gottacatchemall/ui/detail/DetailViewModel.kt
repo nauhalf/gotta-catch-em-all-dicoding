@@ -9,6 +9,7 @@ import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.domain.usecase.PokemonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -33,7 +34,7 @@ class DetailViewModel @Inject constructor(private val pokemonUseCase: PokemonUse
 
     fun setFavorite() = flow {
         _pokemon.value?.let {
-            emit(pokemonUseCase.setFavoritePokemon(it, !it.isFavorite).first())
+            emitAll(pokemonUseCase.setFavoritePokemon(it, !it.isFavorite))
         }
     }
 }

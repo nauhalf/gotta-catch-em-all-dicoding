@@ -30,14 +30,16 @@
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="none"
                 app:hintEnabled="false"
+                app:placeholderTextAppearance="@style/PoppinsRegular14"
                 app:layout_constraintTop_toTopOf="parent"
-                app:placeholderText="Cari Pokemon">
+                app:placeholderText="@string/cari_pokemon">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={vm.keyword}"
                     android:background="@null"
+                    android:hint="@string/cari_pokemon"
                     android:id="@+id/et_filter"
                     android:drawableStart="@drawable/ic_search_medium_gray"
                     android:drawablePadding="@dimen/xsmall"

@@ -1,9 +1,7 @@
 package com.nauhalf.gottacatchemall.core.data.source
 
-import android.net.Network
 import android.util.Log
 import com.nauhalf.gottacatchemall.core.data.source.local.LocalDataSource
-import com.nauhalf.gottacatchemall.core.data.source.local.entity.StatEntity
 import com.nauhalf.gottacatchemall.core.data.source.remote.RemoteDataSource
 import com.nauhalf.gottacatchemall.core.data.source.remote.network.ApiResponse
 import com.nauhalf.gottacatchemall.core.data.source.remote.response.PokemonResponse
@@ -16,12 +14,8 @@ import com.nauhalf.gottacatchemall.core.utils.toPokemonDomain
 import com.nauhalf.gottacatchemall.core.utils.toPokemonDomains
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -59,15 +53,16 @@ class PokemonRepository @Inject constructor(
         }
     }
 
-    override fun setFavoritePokemon(pokemon: Pokemon, state: Boolean): Flow<Boolean> = flow {
-        val result = CoroutineScope(Dispatchers.IO).async {
-            localDataSource.setFavoritePokemon(
-                pokemon = pokemon.toPokemonAllStuffEntity().pokemon,
-                state
-            )
+    override fun setFavoritePokemon(pokemon: Pokemon, state: Boolean): Flow<Pokemon> = flow {
+        val result =
+            withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+                localDataSource.setFavoritePokemon(
+                    pokemon = pokemon.toPokemonAllStuffEntity().pokemon,
+                    state
+                )
 
-        }.await()
-        emitAll(result.map { it.isFavorite })
+            }
+        emitAll(result.map { it.toPokemonDomain() })
     }
 
     override fun getPokemonSpecies(pokemon: Pokemon): Flow<Resource<Pokemon>> =

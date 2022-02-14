@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
 
-class PokemonGridItemDecoration (private val mSizeGridSpacingPx: Int, private val mGridSize: Int) :
+class PokemonGridItemDecoration(private val mSizeGridSpacingPx: Int, private val mGridSize: Int) :
     ItemDecoration() {
     private var mNeedLeftSpacing = false
 
@@ -19,7 +19,7 @@ class PokemonGridItemDecoration (private val mSizeGridSpacingPx: Int, private va
         val frameWidth =
             ((parent.width - mSizeGridSpacingPx.toFloat() * (mGridSize - 1)) / mGridSize).toInt()
         val padding = parent.width / mGridSize - frameWidth
-        val itemPosition = (view.getLayoutParams() as RecyclerView.LayoutParams).viewAdapterPosition
+        val itemPosition = (view.layoutParams as RecyclerView.LayoutParams).bindingAdapterPosition
         if (itemPosition < mGridSize) {
             outRect.top = 0
         } else {

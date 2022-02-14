@@ -16,7 +16,7 @@ abstract class PokemonDao {
     abstract fun getPokemonById(pokemonId: Int): Flow<PokemonAllStuffEntity>
 
 
-    @Query("SELECT * FROM pokemon")
+    @Query("SELECT * FROM pokemon WHERE isFavorite=1")
     abstract fun getFavoritePokemon(): Flow<List<PokemonAllStuffEntity>>
 
     @Transaction

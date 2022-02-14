@@ -12,7 +12,10 @@ import com.nauhalf.gottacatchemall.core.utils.colorOfFirstType
 import com.nauhalf.gottacatchemall.databinding.ItemPokemonBinding
 
 
-class PokemonListAdapter(diffUtil: DiffUtil.ItemCallback<Pokemon>, private val onItemSelected: (pokemon: Pokemon) -> Unit) :
+class PokemonListAdapter(
+    diffUtil: DiffUtil.ItemCallback<Pokemon>,
+    private val onItemSelected: (pokemon: Pokemon) -> Unit
+) :
     ListAdapter<Pokemon, PokemonListAdapter.PokemonViewHolder>(diffUtil) {
     inner class PokemonViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
