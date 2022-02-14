@@ -8,13 +8,13 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val pokeApi: PokeApi) {
-    suspend fun getAllPokemon(limit: Int = 50, offset: Int = 0): Flow<ApiResponse<List<PokemonResponse>>> = channelFlow {
-        coroutineScope {
+    suspend fun getAllPokemon(limit: Int = 50, offset: Int = 0): Flow<ApiResponse<List<PokemonResponse>>> = flow {
 
             try {
                 val response = pokeApi.getAllPokemon(limit, offset)
@@ -25,16 +25,15 @@ class RemoteDataSource @Inject constructor(private val pokeApi: PokeApi) {
                     }.awaitAll()
                 }
                 if (newArray.isNotEmpty()) {
-                    send(ApiResponse.Success(newArray))
+                    emit(ApiResponse.Success(newArray))
                 } else {
-                    send(ApiResponse.Empty)
+                    emit(ApiResponse.Empty)
                 }
             } catch (e: Exception) {
-                send(ApiResponse.Error(e.message.toString()))
+                emit(ApiResponse.Error(e.message.toString()))
                 Log.e("RemoteDataSource", e.message.toString())
             }
-        }
-    }
+    }.flowOn(Dispatchers.IO)
 
     fun CoroutineScope.getDetailPokemon(id: Int): Deferred<PokemonResponse> =
         async(Dispatchers.IO) {
