@@ -85,8 +85,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             pokemonAdapter.retry()
         }
 //        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this@MainActivity, 3)
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+        val layoutManager = GridLayoutManager(this@MainActivity, 3)
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
             override fun getSpanSize(position: Int): Int {
                 return if (position == pokemonAdapter.itemCount  && footerAdapter.itemCount > 0) {
                     3
