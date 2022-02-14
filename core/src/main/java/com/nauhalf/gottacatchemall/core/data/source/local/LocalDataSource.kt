@@ -1,10 +1,8 @@
 package com.nauhalf.gottacatchemall.core.data.source.local
 
-import android.util.Log
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonAllStuffEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.entity.PokemonEntity
 import com.nauhalf.gottacatchemall.core.data.source.local.room.PokemonDao
-import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow

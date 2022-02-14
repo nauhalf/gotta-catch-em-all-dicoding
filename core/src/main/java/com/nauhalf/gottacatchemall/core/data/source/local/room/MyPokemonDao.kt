@@ -1,7 +1,8 @@
 package com.nauhalf.gottacatchemall.core.data.source.local.room
 
 import androidx.room.*
-import com.nauhalf.gottacatchemall.core.data.source.local.entity.*
+import com.nauhalf.gottacatchemall.core.data.source.local.entity.MyPokemonEntity
+import com.nauhalf.gottacatchemall.core.data.source.local.entity.MyPokemonWithAllStuffEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -1,6 +1,5 @@
 package com.nauhalf.gottacatchemall.core.data.source
 
-import android.util.Log
 import com.nauhalf.gottacatchemall.core.data.source.local.LocalDataSource
 import com.nauhalf.gottacatchemall.core.data.source.remote.RemoteDataSource
 import com.nauhalf.gottacatchemall.core.data.source.remote.network.ApiResponse
@@ -14,7 +13,10 @@ import com.nauhalf.gottacatchemall.core.utils.toPokemonDomain
 import com.nauhalf.gottacatchemall.core.utils.toPokemonDomains
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,7 +1,8 @@
 package com.nauhalf.gottacatchemall.core.data.source.local.entity
 
 import android.os.Parcelable
-import androidx.room.*
+import androidx.room.Embedded
+import androidx.room.Relation
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import com.nauhalf.gottacatchemall.adapter.PokemonGridItemDecoration
 import com.nauhalf.gottacatchemall.adapter.PokemonListAdapter
 import com.nauhalf.gottacatchemall.core.base.BaseFragment
-import com.nauhalf.gottacatchemall.core.data.source.Resource
 import com.nauhalf.gottacatchemall.core.domain.model.Pokemon
 import com.nauhalf.gottacatchemall.core.utils.debounce
 import com.nauhalf.gottacatchemall.core.utils.onTextChanged

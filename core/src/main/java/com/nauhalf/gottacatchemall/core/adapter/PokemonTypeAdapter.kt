@@ -2,14 +2,11 @@ package com.nauhalf.gottacatchemall.core.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
-import com.nauhalf.gottacatchemall.core.databinding.ItemPokemonStatTitleBinding
 import com.nauhalf.gottacatchemall.core.databinding.ItemPokemonTypeBinding
-import com.nauhalf.gottacatchemall.core.domain.model.Stat
 import com.nauhalf.gottacatchemall.core.domain.model.Type
 import com.nauhalf.gottacatchemall.core.utils.colorOfType
 

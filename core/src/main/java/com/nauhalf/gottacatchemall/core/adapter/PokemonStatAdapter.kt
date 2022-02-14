@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import com.nauhalf.gottacatchemall.core.databinding.ItemPokemonStatBinding
-import com.nauhalf.gottacatchemall.core.databinding.ItemPokemonStatTitleBinding
 import com.nauhalf.gottacatchemall.core.domain.model.Stat
-import com.nauhalf.gottacatchemall.core.utils.colorOfType
 
 class PokemonStatAdapter(@AttrRes private val color: Int) :
     ListAdapter<Stat, PokemonStatAdapter.PokemonStatViewHolder>(object :

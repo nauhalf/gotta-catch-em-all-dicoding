@@ -7,10 +7,8 @@ import com.nauhalf.gottacatchemall.core.data.source.remote.response.PokemonRespo
 import com.nauhalf.gottacatchemall.core.data.source.remote.response.PokemonSpeciesResponse
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import okhttp3.Dispatcher
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -1,6 +1,5 @@
 package com.nauhalf.gottacatchemall.core.utils
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.text.Editable

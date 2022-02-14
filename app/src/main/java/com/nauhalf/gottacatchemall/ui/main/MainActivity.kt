@@ -20,7 +20,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun setUp() {
         val pager = FragmentPagerAdapter(
-            listOf(HomeFragment(),
+            listOf(
+                HomeFragment(),
                 Class.forName("com.nauhalf.gottacatchemall.favorite.ui.FavoriteFragment")
                     .newInstance() as Fragment
             ),
