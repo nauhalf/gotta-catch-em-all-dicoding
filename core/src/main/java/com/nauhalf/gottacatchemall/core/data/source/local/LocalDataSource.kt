@@ -27,23 +27,17 @@ class LocalDataSource @Inject constructor(private val pokemonDao: PokemonDao) {
     ): Flow<PokemonAllStuffEntity> =
         flow {
             pokemon.isFavorite = newState
-            pokemonDao.updatePokemon(pokemon)
+            pokemonDao.updatePokemonFavorite(pokemon.id, newState)
 
             val newPokemon = getPokemonById(pokemon.id).first()
-            println("Get Pokemon from db: $newPokemon")
-
             emit(
                 newPokemon
             )
         }
 
-    suspend fun updatePokemonRateDescription(
-        pokemon: PokemonEntity,
-        description: String?,
-        captureRate: Int
-    ) {
-        pokemon.description = description
-        pokemon.captureRate = captureRate
-        pokemonDao.updatePokemon(pokemon)
+    suspend fun updateDescription( pokemon: PokemonEntity,
+                                   description: String?,
+                                   captureRate: Int) {
+        pokemonDao.updatePokemonDescription(pokemon.id, description, captureRate)
     }
 }

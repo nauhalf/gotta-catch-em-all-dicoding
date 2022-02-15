@@ -45,7 +45,10 @@ abstract class PokemonDao {
     @Query("DELETE FROM type WHERE pokemonId=:pokemonId")
     abstract suspend fun deleteType(pokemonId: Int)
 
-    @Update
-    abstract suspend fun updatePokemon(pokemon: PokemonEntity)
+    @Query("UPDATE pokemon SET isFavorite= :isFavorite WHERE _id=:id")
+    abstract suspend fun updatePokemonFavorite(id: Int, isFavorite: Boolean)
+
+    @Query("UPDATE pokemon SET captureRate= :captureRate, description = :description WHERE _id=:id")
+    abstract suspend fun updatePokemonDescription(id: Int, description: String?, captureRate: Int)
 
 }

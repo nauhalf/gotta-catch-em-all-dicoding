@@ -86,11 +86,7 @@ class PokemonRepository @Inject constructor(
                 val description = data.flavorTextEntries.filter { it.language == "en" }.distinct()
                     .take(3).joinToString(" ") { it.flavorText }
                     .replace("[\\n\\t\\f]".toRegex(), " ")
-                localDataSource.updatePokemonRateDescription(
-                    p.pokemon,
-                    description,
-                    data.captureRate
-                )
+                localDataSource.updateDescription(p.pokemon, description, data.captureRate)
             }
 
         }.asFlow()
