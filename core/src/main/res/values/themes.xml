@@ -44,9 +44,9 @@
         <item name="android:textColor">?attr/colorDarkGray</item>
     </style>
 
-    <style name="Theme.GottaCatchEmAll.BottomNavigation" parent="Theme.GottaCatchEmAll">
-        <item name="colorPrimary">?attr/colorDarkGray</item>
-    </style>
+<!--    <style name="Theme.GottaCatchEmAll.BottomNavigation" parent="Theme.GottaCatchEmAll">-->
+<!--        <item name="colorPrimary">?attr/colorDarkGray</item>-->
+<!--    </style>-->
 
     <style name="MyDenseOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="materialThemeOverlay">@style/MyThemeOverlayOutlinedDense</item>

@@ -6,10 +6,10 @@
         <item name="fontFamily">@font/poppins</item>
     </style>
 
-    <style name="PoppinsRegular8" parent="PoppinsRegular">
-        <item name="lineHeight">12sp</item>
-        <item name="android:textSize">8sp</item>
-    </style>
+<!--    <style name="PoppinsRegular8" parent="PoppinsRegular">-->
+<!--        <item name="lineHeight">12sp</item>-->
+<!--        <item name="android:textSize">8sp</item>-->
+<!--    </style>-->
 
     <style name="PoppinsRegular10" parent="PoppinsRegular">
         <item name="lineHeight">16sp</item>
@@ -24,20 +24,20 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="PoppinsRegular24" parent="PoppinsRegular">
-        <item name="android:textSize">24sp</item>
-        <item name="lineHeight">32sp</item>
-    </style>
+<!--    <style name="PoppinsRegular24" parent="PoppinsRegular">-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--        <item name="lineHeight">32sp</item>-->
+<!--    </style>-->
 
     <style name="PoppinsBold" parent="PoppinsRegular">
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="fontFamily">@font/poppins_bold</item>
     </style>
 
-    <style name="PoppinsBold8" parent="PoppinsBold">
-        <item name="lineHeight">12sp</item>
-        <item name="android:textSize">8sp</item>
-    </style>
+<!--    <style name="PoppinsBold8" parent="PoppinsBold">-->
+<!--        <item name="lineHeight">12sp</item>-->
+<!--        <item name="android:textSize">8sp</item>-->
+<!--    </style>-->
 
     <style name="PoppinsBold10" parent="PoppinsBold">
         <item name="lineHeight">16sp</item>

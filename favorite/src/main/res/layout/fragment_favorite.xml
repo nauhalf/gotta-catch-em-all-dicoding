@@ -39,8 +39,9 @@
                 android:drawableStart="@drawable/ic_search_medium_gray"
                 android:drawablePadding="@dimen/xsmall"
                 android:hint="@string/cari_pokemon"
+                android:textColorHint="#757575"
                 android:text="@={vm.keyword}"
-                android:textAppearance="@style/PoppinsRegular14" />
+                android:textAppearance="@style/PoppinsRegular14"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

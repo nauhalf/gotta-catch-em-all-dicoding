@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">Pokédex - Gotta Catch \'Em All</string>
     <string name="pokedex">Pokédex</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
-    <string name="back_button">Back Button</string>
     <string name="pokemon_image">Pokemon Image</string>
     <string name="about">About</string>
     <string name="weight">Weight</string>
@@ -13,4 +10,6 @@
     <string name="base_stats">Base Stats</string>
     <string name="cari_pokemon">Cari Pokemon</string>
     <string name="title_favorite">Favorite</string>
+    <string name="collapsing_toolbar_layout_image">Collapsing toolbar layout image</string>
+    <string name="pokeball">Pokeball</string>
 </resources>
