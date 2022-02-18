@@ -28,8 +28,7 @@ buildscript {
     ext.activity_ktx_version = "1.4.0"
     ext.fragment_ktx_version = "1.4.1"
 
-    ext.hilt_version = '2.40'
-
+    ext.hilt_version = '2.36'
     ext.paging_version = '3.1.0'
     ext.lottie_version = '4.2.2'
     ext.shimmer_version = '0.5.0'
@@ -38,7 +37,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.4"
+        classpath 'com.android.tools.build:gradle:4.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30"
 
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"

@@ -21,7 +21,7 @@ abstract class PokemonDao {
 
     @Transaction
     open suspend fun insertPokemonStuff(pokemons: List<PokemonAllStuffEntity>) {
-        pokemons.forEach {
+        for(it in pokemons){
             insertPokemon(it.pokemon)
             deleteStat(it.pokemon.id)
             insertStat(it.stats)
