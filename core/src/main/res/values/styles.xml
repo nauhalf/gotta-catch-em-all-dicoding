@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="PoppinsRegular" parent="android:Widget.TextView">
         <item name="android:textColor">?attr/colorDarkGray</item>
         <item name="android:fontFamily">@font/poppins</item>
         <item name="fontFamily">@font/poppins</item>
     </style>
 
-<!--    <style name="PoppinsRegular8" parent="PoppinsRegular">-->
-<!--        <item name="lineHeight">12sp</item>-->
-<!--        <item name="android:textSize">8sp</item>-->
-<!--    </style>-->
+    <!--    <style name="PoppinsRegular8" parent="PoppinsRegular">-->
+    <!--        <item name="lineHeight">12sp</item>-->
+    <!--        <item name="android:textSize">8sp</item>-->
+    <!--    </style>-->
 
     <style name="PoppinsRegular10" parent="PoppinsRegular">
         <item name="lineHeight">16sp</item>
@@ -24,20 +25,20 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-<!--    <style name="PoppinsRegular24" parent="PoppinsRegular">-->
-<!--        <item name="android:textSize">24sp</item>-->
-<!--        <item name="lineHeight">32sp</item>-->
-<!--    </style>-->
+    <!--    <style name="PoppinsRegular24" parent="PoppinsRegular">-->
+    <!--        <item name="android:textSize">24sp</item>-->
+    <!--        <item name="lineHeight">32sp</item>-->
+    <!--    </style>-->
 
     <style name="PoppinsBold" parent="PoppinsRegular">
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="fontFamily">@font/poppins_bold</item>
     </style>
 
-<!--    <style name="PoppinsBold8" parent="PoppinsBold">-->
-<!--        <item name="lineHeight">12sp</item>-->
-<!--        <item name="android:textSize">8sp</item>-->
-<!--    </style>-->
+    <!--    <style name="PoppinsBold8" parent="PoppinsBold">-->
+    <!--        <item name="lineHeight">12sp</item>-->
+    <!--        <item name="android:textSize">8sp</item>-->
+    <!--    </style>-->
 
     <style name="PoppinsBold10" parent="PoppinsBold">
         <item name="lineHeight">16sp</item>
@@ -51,11 +52,18 @@
     <style name="PoppinsBold14" parent="PoppinsBold10">
         <item name="android:textSize">14sp</item>
     </style>
+
     <style name="PoppinsBold16" parent="PoppinsBold10">
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="PoppinsBold24" parent="PoppinsBold10">
         <item name="android:textSize">24sp</item>
         <item name="lineHeight">32sp</item>
+    </style>
+
+    <!--    Prevent Inspect Code Performance    -->
+    <style name="ShimmerTextDescription" parent="PoppinsRegular12">
+        <item name="android:background">@drawable/bg_shimmer</item>
     </style>
 </resources>
