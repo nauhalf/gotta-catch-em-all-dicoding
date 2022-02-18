@@ -9,7 +9,7 @@ import com.nauhalf.gottacatchemall.core.data.source.local.entity.TypeEntity
 
 @Database(
     entities = [PokemonEntity::class, StatEntity::class, TypeEntity::class, MyPokemonEntity::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class PokemonDatabase : RoomDatabase() {
