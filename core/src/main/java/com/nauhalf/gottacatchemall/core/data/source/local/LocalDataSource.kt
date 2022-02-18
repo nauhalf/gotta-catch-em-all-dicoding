@@ -35,9 +35,11 @@ class LocalDataSource @Inject constructor(private val pokemonDao: PokemonDao) {
             )
         }
 
-    suspend fun updateDescription( pokemon: PokemonEntity,
-                                   description: String?,
-                                   captureRate: Int) {
+    suspend fun updateDescription(
+        pokemon: PokemonEntity,
+        description: String?,
+        captureRate: Int
+    ) {
         pokemonDao.updatePokemonDescription(pokemon.id, description, captureRate)
     }
 }

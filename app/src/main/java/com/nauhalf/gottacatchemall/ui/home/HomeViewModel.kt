@@ -27,9 +27,7 @@ class HomeViewModel @Inject constructor(pokemonUseCase: PokemonUseCase) : ViewMo
         get() = _loadingLiveData
 
 
-
-
-    fun setLoading(value: Boolean){
+    fun setLoading(value: Boolean) {
         _loadingLiveData.value = value
     }
 
