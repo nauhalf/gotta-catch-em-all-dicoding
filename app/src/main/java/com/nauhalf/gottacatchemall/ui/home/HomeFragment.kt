@@ -2,6 +2,7 @@ package com.nauhalf.gottacatchemall.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -76,22 +77,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             if (pokemon != null) {
                 when (pokemon) {
                     is Resource.Error -> {
-                        stopLoading()
+                        viewModel.setLoading(false)
+                        Toast.makeText(requireContext(), pokemon.message, Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> {
-                        startLoading()
+                        viewModel.setLoading(true)
                     }
                     is Resource.Success -> {
                         viewModel.tempPokemon = pokemon.data ?: listOf()
                         viewModel.onSearchChanged(viewModel.keyword.value)
-                        stopLoading()
+                        viewModel.setLoading(false)
                     }
                 }
             }
         }
 
+        viewModel.loadingLiveData.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                startLoading()
+            } else {
+                stopLoading()
+            }
+        }
+
         viewModel.filteredPokemon.observe(viewLifecycleOwner) { pokemons ->
             pokemonListAdapter.submitList(pokemons)
+            if (pokemons.isEmpty()) {
+                binding.llEmptyData.isVisible = true
+                binding.rvPokemon.isVisible = false
+            } else {
+                binding.llEmptyData.isVisible = false
+                binding.rvPokemon.isVisible = true
+            }
         }
     }
 

@@ -12,4 +12,6 @@
     <string name="title_favorite">Favorite</string>
     <string name="collapsing_toolbar_layout_image">Collapsing toolbar layout image</string>
     <string name="pokeball">Pokeball</string>
+    <string name="empty_pokemon_placeholder">Empty Pokemon Placeholder</string>
+    <string name="no_pokemon_found">No Pokemon Found</string>
 </resources>

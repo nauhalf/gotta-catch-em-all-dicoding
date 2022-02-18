@@ -2,6 +2,7 @@ package com.nauhalf.gottacatchemall.favorite.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
@@ -64,6 +65,13 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
 
         viewModel.filteredPokemon.observe(viewLifecycleOwner) { pokemons ->
             pokemonListAdapter.submitList(pokemons)
+            if (pokemons.isEmpty()) {
+                binding.llEmptyData.isVisible = true
+                binding.rvPokemon.isVisible = false
+            } else {
+                binding.llEmptyData.isVisible = false
+                binding.rvPokemon.isVisible = true
+            }
         }
     }
 
