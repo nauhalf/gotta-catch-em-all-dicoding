@@ -12,10 +12,26 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(pokemonUseCase: PokemonUseCase) : ViewModel() {
     val pokemon = pokemonUseCase.getAllPokemon().asLiveData()
+
     lateinit var tempPokemon: List<Pokemon>
+
     private val _filteredPokemon = MutableLiveData<List<Pokemon>>()
+
     val filteredPokemon: LiveData<List<Pokemon>> = _filteredPokemon
+
     val keyword = MutableLiveData("")
+
+    private val _loadingLiveData = MutableLiveData(false)
+
+    val loadingLiveData: LiveData<Boolean>
+        get() = _loadingLiveData
+
+
+
+
+    fun setLoading(value: Boolean){
+        _loadingLiveData.value = value
+    }
 
 
     fun onSearchChanged(value: String?) {

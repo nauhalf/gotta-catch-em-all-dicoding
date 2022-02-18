@@ -59,5 +59,33 @@
             app:spanCount="3"
             tools:listitem="@layout/item_pokemon" />
 
+        <LinearLayout
+            android:id="@+id/ll_empty_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="@dimen/medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_layout_filter">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/empty_pokemon_placeholder"
+                android:src="@drawable/pokeball_gray" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium"
+                style="@style/PoppinsBold16"
+                android:id="@+id/tv_error"
+                android:textColor="?attr/colorMediumGray"
+                android:text="@string/no_pokemon_found"
+                android:textAlignment="center" />
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.nauhalf.gottacatchemall.ui.home.HomeViewModel" />
@@ -15,8 +16,8 @@
         tools:context=".ui.home.HomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
             android:id="@+id/cl_result"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -30,19 +31,19 @@
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="none"
                 app:hintEnabled="false"
-                app:placeholderTextAppearance="@style/PoppinsRegular14"
                 app:layout_constraintTop_toTopOf="parent"
-                app:placeholderText="@string/cari_pokemon">
+                app:placeholderText="@string/cari_pokemon"
+                app:placeholderTextAppearance="@style/PoppinsRegular14">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_filter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={vm.keyword}"
                     android:background="@null"
-                    android:hint="@string/cari_pokemon"
-                    android:id="@+id/et_filter"
                     android:drawableStart="@drawable/ic_search_medium_gray"
                     android:drawablePadding="@dimen/xsmall"
+                    android:hint="@string/cari_pokemon"
+                    android:text="@={vm.keyword}"
                     android:textAppearance="@style/PoppinsRegular14" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -60,6 +61,36 @@
                 app:layout_constraintTop_toBottomOf="@id/et_layout_filter"
                 app:spanCount="3"
                 tools:listitem="@layout/item_pokemon" />
+
+            <LinearLayout
+                android:id="@+id/ll_empty_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:padding="@dimen/medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_layout_filter">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/empty_pokemon_placeholder"
+                    android:src="@drawable/pokeball_gray" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium"
+                    style="@style/PoppinsBold16"
+                    android:id="@+id/tv_error"
+                    android:textColor="?attr/colorMediumGray"
+                    android:text="@string/no_pokemon_found"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.airbnb.lottie.LottieAnimationView
